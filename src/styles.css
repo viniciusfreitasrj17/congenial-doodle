@@ -1,0 +1,28 @@
+body {
+  /* width: 100vw;
+  height: 100vh; */
+  /* overflow: hidden; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #f08, #d0e);
+}
+
+.container {
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: 1px solid #000;
+  margin-top: 20px;
+}
+
+.item {
+  width: 150px;
+  height: 150px;
+  background: white;
+  border-radius: 30px;
+}
