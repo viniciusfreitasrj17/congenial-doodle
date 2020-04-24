@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
+import { Link } from 'react-scroll';
 
-const Action = () => {
+const Action = ({ init, anim }) => {
 
   return (
     <motion.div
       style={{ textAlign: 'center' }}
       className="item"
-      initial={{ scale: 0, /*opacity: 0*/ }}
+      initial={{ scale: init }}
       animate={{
         rotate: 360,
-        scale: 1,
-        /*opacity: shouldShowActions ? 1 : 0*/
+        scale: anim,
       }}
       transition={{
         type: "spring",
         stiffness: 260,
         damping: 20,
         rotate: { duration: 1.2 }
-        /*opacity: { duration: 0.2 }*/
       }}
     > 
       <img 
@@ -29,30 +28,25 @@ const Action = () => {
   )
 }
 
-const ActionReverse = () => {
+const ArrowUp = ({init, anim}) => {
 
   return (
     <motion.div
-      style={{ textAlign: 'center' }}
-      className="item"
-      initial={{ scale: 1, /*opacity: 0*/ }}
+      className='arrowUp'
+      initial={{ scale: init, opacity: init }}
       animate={{
-        rotate: 360,
-        scale: 0,
-        /*opacity: shouldShowActions ? 1 : 0*/
+        scale: anim,
+        opacity: anim,
       }}
       transition={{
         type: "spring",
         stiffness: 260,
         damping: 20,
-        rotate: { duration: 1.2 }
-        /*opacity: { duration: 0.2 }*/
+        opacity: { duration: 1.2 },
+        scale: { duration: 0.5 }
       }}
     > 
-      <img 
-        src='https://github.githubassets.com/images/modules/logos_page/Octocat.png' 
-        style={{ width: '150px', height: '150px' }} 
-      /> 
+      <Link className='arrowUp' to="root" spy={true} smooth={true} offset={50} duration={1000} delay={100}/>
     </motion.div>
   )
 }
@@ -64,6 +58,7 @@ function App() {
   const [el1, setEl1] = useState('');
   const [el2, setEl2] = useState('');
   const [el3, setEl3] = useState('');
+  const [el4, setEl4] = useState('');
 
   useEffect(() => {
     function handleScroll() {
@@ -80,23 +75,29 @@ function App() {
     function handleElement() {
       if (lastYPos >= 0 && lastYPos < 369) {
         setEl1(
-          <Action />
+          <Action init={0} anim={1} />
         )
-      } else setEl1(<ActionReverse />)
+      } else setEl1(<Action init={1} anim={0} />)
 
 
       if (lastYPos >= 370 && lastYPos < 909) {
         setEl2(
-          <Action />
+          <Action init={0} anim={1} />
         )
-      } else setEl2(<ActionReverse />)
+      } else setEl2(<Action init={1} anim={0} />)
 
 
       if (lastYPos >= 910) {
         setEl3(
-          <Action />
+          <Action init={0} anim={1} />
         )
-      } else setEl3(<ActionReverse />)
+      } else setEl3(<Action init={1} anim={0} />)
+
+      if (lastYPos >= 100) {
+        setEl4(
+          <ArrowUp init={0} anim={1} />
+        )
+      } else setEl4(<ArrowUp init={1} anim={0} />)
     }
 
     handleElement();
@@ -111,7 +112,7 @@ function App() {
   // }, [lastYPos])
 
   return (
-    <div>
+    <div  id='home'>
       <div className='container'>
         {el1}
       </div>
@@ -121,6 +122,7 @@ function App() {
       <div className='container'>
         {el3}
       </div>
+      {el4}
     </div>
   );
 }
