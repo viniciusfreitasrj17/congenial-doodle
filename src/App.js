@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import { Link } from 'react-scroll';
 
-const Action = ({ init, anim }) => {
+const Action = ({ init, anim, rotate }) => {
 
   return (
     <motion.div
@@ -10,7 +10,7 @@ const Action = ({ init, anim }) => {
       className="item"
       initial={{ scale: init }}
       animate={{
-        rotate: 360,
+        rotate: rotate,
         scale: anim,
       }}
       transition={{
@@ -75,23 +75,23 @@ function App() {
     function handleElement() {
       if (lastYPos >= 0 && lastYPos < 369) {
         setEl1(
-          <Action init={0} anim={1} />
+          <Action init={0} anim={1} rotate={360} />
         )
-      } else setEl1(<Action init={1} anim={0} />)
+      } else setEl1(<Action init={1} anim={0} rotate={90} />)
 
 
       if (lastYPos >= 370 && lastYPos < 909) {
         setEl2(
-          <Action init={0} anim={1} />
+          <Action init={0} anim={1} rotate={360} />
         )
-      } else setEl2(<Action init={1} anim={0} />)
+      } else setEl2(<Action init={1} anim={0} rotate={90} />)
 
 
       if (lastYPos >= 910) {
         setEl3(
-          <Action init={0} anim={1} />
+          <Action init={0} anim={1} rotate={360} />
         )
-      } else setEl3(<Action init={1} anim={0} />)
+      } else setEl3(<Action init={1} anim={0} rotate={90} />)
 
       if (lastYPos >= 100) {
         setEl4(
